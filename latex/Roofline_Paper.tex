@@ -325,7 +325,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Roofline Performance Model for Supercomputers}
+\title{Extending the Roofline Model for Supercomputers}
 
 
 % author names and affiliations
@@ -383,7 +383,7 @@ Indianapolis, Indiana, USA}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-The roofline performance model\cite{Roofline09} is a simple 2-D visual tool that provides useful insight on kernel optimization on multi-core systems. In this report, an attempt is made to extend the roofline performance model to a 3-D roofline model for homogeneous distributed-memory systems, taking into consideration the peak floating point performance, the peak memory throughput and the peak communication throughput across nodes. A 3-D roofline performance model is constructed for 16 AMD Opteron Interlagos x86\_64 nodes on BigRed II and used to bound the performance of the \textit{\textbf{SUMMA}} parallel algorithm \cite{summa95} on BigRed II.
+The roofline performance model\cite{Roofline09} is a simple 2-D visual tool that provides useful insight on kernel optimization on multi-core systems. In this project, an attempt is made to extend the roofline performance model to a 3-D roofline model for supercomputers, taking into consideration the peak floating point performance, the peak memory throughput and the peak communication throughput across nodes. A 3-D roofline performance model is constructed for 16 AMD Opteron Interlagos x86\_64 nodes on BigRed II and used to bound the performance of the \textit{\textbf{SUMMA}} parallel algorithm \cite{summa95} on BigRed II.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -408,7 +408,11 @@ TODO; TODO; TODO;
 
 \section{Introduction}
 % no \IEEEPARstart
-TODO \cite{Roofline09}
+Computationally intensive problems in industry and academia are usually solved using High Performance Computing (HPC) resources. These systems consist of dedicated high-end processors placed in close proximity and connected by high speed networks. Kernel optimization on such a system can be a daunting task. Therefore kernel performance models such as the roofline performance model proposed in \cite{Roofline09}, become very useful. The roofline model provides insightful kernel performance on multicore systems, however it cannot scale to a group of multi-core processors connected by a high speed network (i.e., a typical supercomputer configuration).
+
+In this paper, we extend the roofline model to a group of multi-core processors connected by a high speed network by taking communication bottleneck into consideration. 
+
+TODO , \cite{expPerfmOnHHS}, \cite{rooflineMatMdel}
 %\hfill mds
  
 %\hfill August 26, 2015
@@ -417,7 +421,9 @@ TODO
 
 
 \section{Proposed 3-D Roofline Model} \label{contribution}
-TODO
+Create 2-D model - (peak performance of multicore, memory bandwith using STREAM, operational intensity of kernels)
+
+Create 3-D model - (peak performance of multicore, memory bandwith using STREAM, operational intensity of kernels, communication intensity)
 
 \subsection{Peak Network Throughput}
 TODO

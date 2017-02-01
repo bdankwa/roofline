@@ -1,0 +1,4 @@
+http://mvapich.cse.ohio-state.edu/benchmarks/
+https://software.intel.com/en-us/articles/intel-mpi-benchmarks/
+https://www.nas.nasa.gov/publications/npb.html
+https://github.com/ParRes/Kernels

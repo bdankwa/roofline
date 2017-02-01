@@ -1,0 +1,184 @@
+\documentclass[dvips,12pt]{article}
+
+% Any percent sign marks a comment to the end of the line
+
+% Every latex document starts with a documentclass declaration like this
+% The option dvips allows for graphics, 12pt is the font size, and article
+%   is the style
+
+\usepackage[pdftex]{graphicx}
+\usepackage{url}
+\usepackage{amsbsy}
+\usepackage{amsmath}
+\usepackage{array}
+\newcolumntype{L}{>{\centering\arraybackslash}m{2cm}}
+
+
+% These are additional packages for "pdflatex", graphics, and to include
+% hyperlinks inside a document.
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{8.5in}
+
+% These force using more of the margins that is the default style
+
+\begin{document}
+
+% Everything after this becomes content
+% Replace the text between curly brackets with your own
+
+\title{Roofline Performance Model for Distributed Memory Architectures}
+\author{Boakye Dankwa}
+\date{\today}
+
+% You can leave out "date" and it will be added automatically for today
+% You can change the "\today" date to any text you like
+
+
+\maketitle
+
+% This command causes the title to be created in the document
+
+\section{Abstract}
+The roofline performance model\cite{rfline09} is a simple insightful tool that bounds kernel performance on multi-core systems. In this paper, an attempt is made to extend the roofline performance models to a 3-D  roofline model for a supercomputer, taking into consideration the peak floating point performance per node, the peak memory throughput per node and the peak communication throughput. A 3-D roofline performance model is constructed for 16 AMD Opteron Interlagos x86\_64 nodes on BigRed II and used to bound the performance of the \textit{\textbf{SUMMA}} algorithm \cite{summa96} on BigRed II.
+
+\section{Introduction}
+The roofline performance model bounds kernel performance on multi-core shared-memory systems. It is a 2-D visual performance tool that can provide useful insight into kernel performance and optimization on a given system. It defines a performance upper bound on a given system as:
+
+\begin{eqnarray}
+Attainable \: GFlops/sec &=& min \{Peak Floating Point Performance, \nonumber \\
+& & Peak Memory Bandwidth \times Operational Intensity \}.
+\label{attainable}
+\end{eqnarray}
+
+which relates the kernel performance, system parameters and kernel operational intensity. While the model can provide useful insight on shared-memory systems, it does not account for kernel communications between nodes in a distributed memory system hence cannot be applied to such systems. In this project, it is attempted to extend the roofline performance model to a class of distributed memory systems such as clusters. The roofline model is extended to a 3-D visual performance model which relates system parameters, network parameters, kernel memory and communication traffic.
+
+\section{Previous Work}
+\begin{figure}[h]
+\centering
+\includegraphics[width=5.5in]{ceilings.png}
+\caption{Roofline Model for Multicore Systems}
+\label{2dmodel}
+\end{figure} 
+Patterson and Co.\cite{rfline09} related the performance of a given kernel with the peak floating point performance of the system, the peak memory bandwidth beyond the system cache, and kernel operational intensity. They first define the obtainable performance on a system as in equaton \ref{attainable}. That is, the peak performance that can be obtained on a given multiprocessor system is upper bounded by the minimum of the peak floating point performance, a property of the system, and the kernel's performance constrained by the system's memory bandwidth. They call this upper bound the roofline. To provide insight into kernel performance, the author's added computational and memory bottleneck bounds to the model. These bounds, called ceilings, divides the 2-D diagram, shown in Figure \ref{2dmodel}, into regions and provide insight into how a kernel may be modified to improve performance. They explained that a given optimization technique must be performed to break through its bottleneck ceiling on the model. The computational bottleneck ceilings include thread-level parallelism (TPL) optimization ceiling, instruction-level parallelism (ILP) optimization ceiling and data-level parallelism (SIMD) optimization. These performance ceilings are defined in equations \ref{tlp}, \ref{ilp} and \ref{simd} respectively. The constants in these equations obtained from the system's data sheet.
+
+\begin{eqnarray}
+TLP \: bound &=& number \: of \: cores \times frequency \label{tlp} \\
+ILP \: bound &=& number \: of \: cores \times frequency \nonumber \\
+             & & \times max \left(1, \frac{ThreadPerCore}{Latency} \right) \label{ilp} \\
+SIMD \: bound &=& number \: of \: cores \times frequency \nonumber \\ 
+             & & \times \left(SIMD \: width/SIMD \: throughput \right) \label{simd}
+\end{eqnarray}
+
+The memory bottleneck ceilings include the unity memory stride ceiling, which bounds the performance if the kernel accesses memory contiguously, memory affinity ceiling, which bounds the performance if each processor employs memory affinity and also accesses only local memory, and software prefetching ceiling which bounds performance if kernel combines unity stride access, memory affinity and software prefetching. The authors obtained the memory ceilings using a benchmarks such as STREAM.
+
+The author's demonstrated the model on four multi-core systems: Intel Xeon (Clovertown, e5345), AMD Opetron X4 (Barcelona 2356), Sun UltraSPARC T2+ (Niagrara 2, 5120) and IBM Cell (QS20), and several floating point kernels including SpMV, LBMHD, Stencil and 3D FFT. They concluded that their models provided good insights into the performance of the kernels on these multicore systems, especially the ridge-points- the minimum operational intensity to achieve maximum performance - proved to be better performance predictors than the clock rate of peak performance.
+
+\section{The 3-D Roofline Model}
+The 2-D roofline performance model applies to shared memory multi-core systems. The model cannot be effectively applied to distributed memory systems. In such systems, considerations must be given to peak network bandwidth as well as kernel \textit{communication intensity} on the system. We define \textit{communication intensity} as the number of floating point operations per word of network traffic. Therefore, \textit{communication intensity} gives an indication of network bandwidth consumption of a given kernel on a given distributed memory system.  
+
+\subsection{Communication Model}
+Assuming that all nodes resides on a LAN, let's choose a simple communication model on the systems.
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{MPU Type} &\textbf{AMD Opteron 16-Core} &\textbf{NVIDIA Kepler GK110 GPU}\\
+\hline
+\textbf{ISA} & x86/64 & x86/64 \\
+\hline
+\textbf{Total Threads} & TBD & TBD \\
+\hline	
+\textbf{Total Cores} & TBD &  TBD \\
+\hline
+\textbf{Total Sockets} &  TBD &  TBD \\
+\hline
+\textbf{GHz} &  TBD &  TBD \\
+\hline
+\textbf{Peak GFlops/sec} & TBD &  TBD \\
+\hline		
+\textbf{Stream GB/Sec} &  TBD &  TBD \\
+\hline		
+\end{tabular}
+\caption{Characteristics of two multi-core systems }
+\label{systems}
+\end{table} 
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Kernel} &\textbf{Operational Intensity} &\textbf{Description}\\
+\hline
+\textbf{dgemm} & TBD & BLAS kernel for $C = C + AB$  \\
+\hline
+\textbf{SpMV} & TBD & TBD \\
+\hline			
+\end{tabular}
+\caption{Characteristics of two multi-core systems }
+\label{kernels}
+\end{table} 
+
+
+%\section{Roofline Model Extension}
+
+
+\section{Results}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|L|c|c|L|L|}
+\hline
+\textbf{System} &\textbf{Nodes Used} &\textbf{Cores/Node} &\textbf{Peak Flops/s} &\textbf{Peak Stream Memory Bandwidth} &\textbf{Peak Communication Bandwidth}\\
+\hline
+\textbf{Big Red II} & 16 & 1 & 160GFlops/s & 22.8GBytes/s & 4MBytes/s  \\
+\hline			
+\end{tabular}
+\caption{Characteristics of distributed memory systems }
+\label{Results_system}
+\end{table} 
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|L|}
+\hline
+\textbf{Kernel} &\textbf{Operational Intensity} &\textbf{Communication Intensity} &\textbf{Description}\\
+\hline
+\textbf{SUMMA} & 32 & 2048 & Parallel matrix multiplication  \\
+\hline			
+\end{tabular}
+\caption{Kernel to demonstrate 3-D Roofline model }
+\label{Results_kernel}
+\end{table} 
+
+\section{Conclusion and Future Work}
+
+\section{Acknowledgements}
+
+
+
+ 
+%\begin{thebibliography}{99}
+
+%\bibitem{gonzalez2012} Jonay I. Gonz\'{a}lez Hern\'{a}ndez, 
+%Pilar Ruiz-Lapuente,	
+%Hugo M. Tabernero,	
+%David Montes,	
+%Ramon Canal,	
+%Javier M\'{e}ndez	
+%and Luigi R. Bedin,
+%{No surviving evolved companions of the progenitor of SN1006},
+%Nature, {\bf 489}, 533-536 (2012).
+
+%\end{thebibliography}
+
+\bibliographystyle{plain}
+\bibliography{References}
+
+
+
+\end{document}

@@ -33,4 +33,18 @@ S.~Williams, A.~Waterman, and D.~Patterson, ``Roofline: An insightful visual
 R.~A. van~de Geijn and J.~Watts, ``Summa: Scalable universal matrix
   multiplication algorithm,'' Austin, TX, USA, Tech. Rep., 1995.
 
+\bibitem{expPerfmOnHHS}
+I.~B. Peng, S.~Markidis, E.~Laure, G.~Kestor, and R.~Gioiosa, ``Exploring
+  application performance on emerging hybrid-memory supercomputers,'' in
+  \emph{2016 IEEE 18th International Conference on High Performance Computing
+  and Communications; IEEE 14th International Conference on Smart City; IEEE
+  2nd International Conference on Data Science and Systems
+  (HPCC/SmartCity/DSS)}, Dec 2016, pp. 473--480.
+
+\bibitem{rooflineMatMdel}
+M.~Kong, L.~N. Pouchet, and P.~Sadayappan, ``A roofline-based performance
+  estimator for distributed matrix-multiply on intel cnc,'' in \emph{2015 IEEE
+  International Parallel and Distributed Processing Symposium Workshop}, May
+  2015, pp. 1241--1250.
+
 \end{thebibliography}
