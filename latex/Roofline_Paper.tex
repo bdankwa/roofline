@@ -325,13 +325,13 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Trust in Vehicle-to-Vehicle Communication}
+\title{Roofline Performance Model for Supercomputers}
 
 
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
-\author{\IEEEauthorblockN{Boakye Dankwa, Rajeev R. Raje, Raghavendran Vijayan, Darsh Sanghavi}
+\author{\IEEEauthorblockN{Boakye Dankwa, Fengguang Song}
 \IEEEauthorblockA{Department of Computer and Information Science\\
 Indiana University Purdue University\\
 Indianapolis, Indiana, USA}}
@@ -383,7 +383,7 @@ Indianapolis, Indiana, USA}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-In traditional Pedestrian Automatic Emergency Braking (PAEB) system, vehicles equipped with onboard sensors such as (rader, camera, and infrared) detects pedestrians, alerts the driver and/ or automatically take action to prevent vehicle-pedestrian collision. In some situations, a vehicle may not be able to detect a pedestrian due to  blind spots. Such a vehicle could benefit from the sensor data from neighboring vehicles in making such safety critical decisions. We propose a trust model for ensuring shared data are valid and trustworthy for use in making safety critical decisions. Simulation results of the proposed trust model show promise.
+The roofline performance model\cite{Roofline09} is a simple 2-D visual tool that provides useful insight on kernel optimization on multi-core systems. In this report, an attempt is made to extend the roofline performance model to a 3-D roofline model for homogeneous distributed-memory systems, taking into consideration the peak floating point performance, the peak memory throughput and the peak communication throughput across nodes. A 3-D roofline performance model is constructed for 16 AMD Opteron Interlagos x86\_64 nodes on BigRed II and used to bound the performance of the \textit{\textbf{SUMMA}} parallel algorithm \cite{summa95} on BigRed II.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -408,7 +408,7 @@ TODO; TODO; TODO;
 
 \section{Introduction}
 % no \IEEEPARstart
-TODO
+TODO \cite{Roofline09}
 %\hfill mds
  
 %\hfill August 26, 2015
@@ -416,13 +416,16 @@ TODO
 TODO
 
 
-\section{Proposed Trust Management System for V2V-PAEB} \label{contribution}
+\section{Proposed 3-D Roofline Model} \label{contribution}
 TODO
 
-\subsubsection{Measured Trust}
+\subsection{Peak Network Throughput}
 TODO
 
-\section{Results and Discussions}
+\subsection{Communication Intensity}
+TODO
+
+\section{Results}
 TODO
 
 \section{Conclusions and Future Extensions}
