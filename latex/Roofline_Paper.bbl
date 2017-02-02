@@ -47,4 +47,10 @@ M.~Kong, L.~N. Pouchet, and P.~Sadayappan, ``A roofline-based performance
   International Parallel and Distributed Processing Symposium Workshop}, May
   2015, pp. 1241--1250.
 
+\bibitem{applyRoofline}
+G.~Ofenbeck, R.~Steinmann, V.~Caparros, D.~G. Spampinato, and M.~Püschel,
+  ``Applying the roofline model,'' in \emph{2014 IEEE International Symposium
+  on Performance Analysis of Systems and Software (ISPASS)}, March 2014, pp.
+  76--85.
+
 \end{thebibliography}
