@@ -1,0 +1,10 @@
+http://mvapich.cse.ohio-state.edu/benchmarks/
+https://software.intel.com/en-us/articles/intel-mpi-benchmarks/
+https://www.nas.nasa.gov/publications/npb.html
+https://github.com/ParRes/Kernels
+https://pdfs.semanticscholar.org/768b/0ac2ac6e4415a3dad0ff47e9718a03c54197.pdf
+
+http://icl.cs.utk.edu/papi/
+http://perfmon2.sourceforge.net/docs_v4.html
+http://perfsuite.ncsa.illinois.edu/publications/LJ135/x27.html
+http://developer.amd.com/tools-and-sdks/archive/compute/amd-codeanalyst-performance-analyzer/amd-codeanalyst-performance-analyzer-for-linux/
