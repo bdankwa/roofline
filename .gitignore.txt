@@ -1,5 +1,0 @@
-latex/*.aux
-latex/*.bbl
-latex/*.log
-latex/*.blg
-latex/*.gz
