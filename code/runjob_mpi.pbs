@@ -1,0 +1,8 @@
+#! /bin/bash
+#PBS -l nodes=2:ppn=1
+#PBS -l walltime=00:10:00
+#PBS -N bdankwa_mpi
+#PBS -q debug_cpu
+#PBS -V
+cd /N/u/bdankwa/BigRed2/research/code
+aprun -n 2 mpi_bw 
